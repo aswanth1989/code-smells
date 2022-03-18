@@ -16,10 +16,10 @@ class SetTest {
     void setUp() {
         empty = new Set();
         oneElement = new Set();
-        oneElement.add("sophia");
+        oneElement.add("aswa");
         manyElement = new Set();
-        manyElement.add("josh");
-        manyElement.add("sasha");
+        manyElement.add("neet");
+        manyElement.add("zeia");
     }
 
     @Test
@@ -37,31 +37,31 @@ class SetTest {
 
     @Test
     void contains() {
-        assertTrue(manyElement.contains("josh"));
-        assertTrue(!manyElement.contains("tracy"));
+        assertTrue(manyElement.contains("neet"));
+        assertTrue(!manyElement.contains("aishi"));
     }
 
     @Test
     void noDuplicates() {
-        oneElement.add("sophia");
+        oneElement.add("aswa");
         assertEquals(1, oneElement.size());
     }
 
     @Test
     void remove() {
-        assertTrue(oneElement.remove("sophia"));
+        assertTrue(oneElement.remove("aswa"));
         assertEquals(0, oneElement.size());
-        assertTrue(manyElement.remove("josh"));
+        assertTrue(manyElement.remove("neet"));
         assertEquals(1, manyElement.size());
     }
 
     @Test
     void removeCollapsesSet() {
-        manyElement.add("tracy");
+        manyElement.add("aishi");
         assertEquals(3, manyElement.size());
-        manyElement.remove("sasha");
+        manyElement.remove("zeia");
         assertEquals(2, manyElement.size());
-        assertEquals("tracy", manyElement.getElementAt(1));
+        assertEquals("aishi", manyElement.getElementAt(1));
     }
 
     @Test
@@ -73,7 +73,7 @@ class SetTest {
     @Test
     void addAllWithList() {
         List list = new List();
-        list.add("dave");
+        list.add("aria");
         oneElement.addAll(list);
         assertEquals(2, oneElement.size());
     }
@@ -81,7 +81,7 @@ class SetTest {
     @Test
     void addAllWithDuplicates() {
         Set newSet = new Set();
-        newSet.add("josh");
+        newSet.add("neet");
         manyElement.addAll(newSet);
         assertEquals(2, manyElement.size());
     }
@@ -89,7 +89,7 @@ class SetTest {
     @Test
     void addAllWithDuplicatesInList() {
         List newList = new List();
-        newList.add("josh");
+        newList.add("neet");
         manyElement.addAll(newList);
         assertEquals(2, manyElement.size());
     }
@@ -119,7 +119,7 @@ class SetTest {
     @Test
     void readOnlyOnRemove() {
         oneElement.setReadOnly(true);
-        oneElement.remove("sophia");
+        oneElement.remove("aswa");
         assertEquals(1, oneElement.size());
     }
 

@@ -8,84 +8,84 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ListTest {
+class ListTest {
     private List empty;
     private List oneElement;
     private List manyElement;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         empty = new List();
         oneElement = new List();
-        oneElement.add("sophia");
+        oneElement.add("aswa");
         manyElement = new List();
-        manyElement.add("josh");
-        manyElement.add("sasha");
+        manyElement.add("neet");
+        manyElement.add("zeia");
     }
 
     @Test
-    public void isEmpty() {
+    void isEmpty() {
         assertTrue(empty.isEmpty());
         assertTrue(!oneElement.isEmpty());
     }
 
     @Test
-    public void contains() {
-        assertTrue(manyElement.contains("josh"));
-        assertTrue(!manyElement.contains("tracy"));
+    void contains() {
+        assertTrue(manyElement.contains("neet"));
+        assertTrue(!manyElement.contains("aishi"));
     }
 
     @Test
-    public void size() {
+    void size() {
         assertEquals(0, empty.size());
         assertEquals(1, oneElement.size());
         assertTrue(manyElement.size() > 1);
     }
 
     @Test
-    public void allowDuplicates() {
-        manyElement.add("sasha");
+    void allowDuplicates() {
+        manyElement.add("zeia");
         assertEquals(3, manyElement.size());
     }
 
     @Test
-    public void remove() {
-        assertTrue(oneElement.remove("sophia"));
+    void remove() {
+        assertTrue(oneElement.remove("aswa"));
         assertEquals(0, oneElement.size());
-        assertTrue(manyElement.remove("josh"));
+        assertTrue(manyElement.remove("neet"));
         assertEquals(1, manyElement.size());
     }
 
     @Test
-    public void removeCollapsesList() {
-        manyElement.add("tracy");
+    void removeCollapsesList() {
+        manyElement.add("aishi");
         assertEquals(3, manyElement.size());
-        manyElement.remove("sasha");
+        manyElement.remove("zeia");
         assertEquals(2, manyElement.size());
-        assertEquals("tracy", manyElement.get(1));
+        assertEquals("aishi", manyElement.get(1));
     }
 
     @Test
-    public void addAll() {
+    void addAll() {
         oneElement.addAll(manyElement);
         assertEquals(3, oneElement.size());
     }
 
     @Test
-    public void addAllWithSet() {
+    void addAllWithSet() {
         Set smallSet = new Set();
-        smallSet.add("Dave");
+        smallSet.add("aria");
         oneElement.addAll(smallSet);
         assertEquals(2, oneElement.size());
     }
 
     @Test
-    public void getWhenIndexOutOfBounds() {
+    void getWhenIndexOutOfBounds() {
         Exception exception = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> empty.get(12));
     }
 
     @Test
-    public void expandability() {
+    void expandability() {
         List expandableList = new List();
         assertEquals(10, expandableList.capacity());
         for (int i = 0; i < 11; i++)
@@ -95,13 +95,13 @@ public class ListTest {
     }
 
     @Test
-    public void override() {
+    void override() {
         oneElement.set(0, "mary");
         assertEquals("mary", oneElement.get(0));
     }
 
     @Test
-    public void overrideWhenOutOfBounds() {
+    void overrideWhenOutOfBounds() {
         try {
             oneElement.set(8, "mary");
             fail("should have thrown ArrayIndexOutOfBoundsException");
@@ -111,28 +111,28 @@ public class ListTest {
     }
 
     @Test
-    public void readOnlyOnAdd() {
+    void readOnlyOnAdd() {
         oneElement.setReadOnly(true);
         oneElement.add("eva");
         assertEquals(1, oneElement.size());
     }
 
     @Test
-    public void readOnlyOnSet() {
+    void readOnlyOnSet() {
         oneElement.setReadOnly(true);
         oneElement.set(0, "eva");
-        assertEquals("sophia", oneElement.get(0));
+        assertEquals("aswa", oneElement.get(0));
     }
 
     @Test
-    public void readOnlyOnRemove() {
+    void readOnlyOnRemove() {
         oneElement.setReadOnly(true);
-        oneElement.remove("sophia");
+        oneElement.remove("aswa");
         assertEquals(1, oneElement.size());
     }
 
     @Test
-    public void readOnlyOnAddAll() {
+    void readOnlyOnAddAll() {
         oneElement.setReadOnly(true);
         oneElement.addAll(manyElement);
         assertEquals(1, oneElement.size());
