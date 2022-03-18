@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -26,13 +27,13 @@ class ListTest {
     @Test
     void isEmpty() {
         assertTrue(empty.isEmpty());
-        assertTrue(!oneElement.isEmpty());
+        assertFalse(oneElement.isEmpty());
     }
 
     @Test
     void contains() {
         assertTrue(manyElement.contains("neet"));
-        assertTrue(!manyElement.contains("aishi"));
+        assertFalse(manyElement.contains("aishi"));
     }
 
     @Test

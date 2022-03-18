@@ -4,15 +4,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
- class MapTest {
+class MapTest {
     private Map empty;
     private Map oneElement;
     private Map manyElement;
 
     @BeforeEach
-     void setUp() {
+    void setUp() {
         empty = new Map();
         oneElement = new Map();
         oneElement.add("CA", "California");
@@ -22,60 +24,60 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     }
 
     @Test
-     void isEmpty() {
+    void isEmpty() {
         assertTrue(empty.isEmpty());
-        assertTrue(!oneElement.isEmpty());
+        assertFalse(oneElement.isEmpty());
     }
 
     @Test
-     void size() {
+    void size() {
         assertEquals(0, empty.size());
         assertEquals(1, oneElement.size());
         assertTrue(manyElement.size() > 1);
     }
 
     @Test
-     void getWhenKeyInMap() {
+    void getWhenKeyInMap() {
         assertEquals("California", oneElement.get("CA"));
     }
 
     @Test
-     void getWhenKeyNotInMap() {
-        assertEquals(null, oneElement.get("AZ"));
+    void getWhenKeyNotInMap() {
+        assertNull(oneElement.get("AZ"));
     }
 
     @Test
-     void getAfterEntryRemoved() {
+    void getAfterEntryRemoved() {
         manyElement.remove("NY");
-        assertEquals(null, manyElement.get("NY"));
+        assertNull(manyElement.get("NY"));
     }
 
     @Test
-     void contains() {
+    void contains() {
         assertTrue(manyElement.contains("Oregon"));
-        assertTrue(!manyElement.contains("California"));
+        assertFalse(manyElement.contains("California"));
     }
 
     @Test
-     void containsWhenValueIsNull() {
+    void containsWhenValueIsNull() {
         oneElement.add("MI", null);
         assertTrue(oneElement.contains(null));
     }
 
     @Test
-     void addIgnoresValueWhenKeyIsNull() {
+    void addIgnoresValueWhenKeyIsNull() {
         oneElement.add(null, "No Value");
-        assertEquals(null, oneElement.get(null));
+        assertNull(oneElement.get(null));
     }
 
     @Test
-     void containsKey() {
+    void containsKey() {
         assertTrue(manyElement.containsKey("OR"));
-        assertTrue(!manyElement.containsKey("CA"));
+        assertFalse(manyElement.containsKey("CA"));
     }
 
     @Test
-     void addOverridesExistingEntry() {
+    void addOverridesExistingEntry() {
         oneElement.add("CA", "Calistoga");
         assertEquals(1, oneElement.size());
         assertEquals("Calistoga", oneElement.get("CA"));
@@ -90,13 +92,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     }
 
     @Test
-     void addAll() {
+    void addAll() {
         oneElement.addAll(manyElement);
         assertEquals(3, oneElement.size());
     }
 
     @Test
-     void addAllWithDuplicates() {
+    void addAllWithDuplicates() {
         Map mapWithDuplicates = new Map();
         mapWithDuplicates.add("NY", "New York");
         manyElement.addAll(mapWithDuplicates);
@@ -104,21 +106,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     }
 
     @Test
-     void readOnlyOnAdd() {
+    void readOnlyOnAdd() {
         oneElement.setReadOnly(true);
         oneElement.add("WI", "Wisconsin");
         assertEquals(1, oneElement.size());
     }
 
     @Test
-     void readOnlyOnRemove() {
+    void readOnlyOnRemove() {
         oneElement.setReadOnly(true);
         oneElement.remove("CA");
         assertEquals(1, oneElement.size());
     }
 
     @Test
-     void readOnlyOnAddAll() {
+    void readOnlyOnAddAll() {
         oneElement.setReadOnly(true);
         oneElement.addAll(manyElement);
         assertEquals(1, oneElement.size());
