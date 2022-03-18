@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
- class ListTest {
+public class ListTest {
     private List empty;
     private List oneElement;
     private List manyElement;
 
     @BeforeEach
-     void setUp() {
+    public void setUp() {
         empty = new List();
         oneElement = new List();
         oneElement.add("sophia");
@@ -24,32 +24,32 @@ import static org.junit.jupiter.api.Assertions.fail;
     }
 
     @Test
-     void isEmpty() {
+    public void isEmpty() {
         assertTrue(empty.isEmpty());
         assertTrue(!oneElement.isEmpty());
     }
 
     @Test
-     void contains() {
+    public void contains() {
         assertTrue(manyElement.contains("josh"));
         assertTrue(!manyElement.contains("tracy"));
     }
 
     @Test
-     void size() {
+    public void size() {
         assertEquals(0, empty.size());
         assertEquals(1, oneElement.size());
         assertTrue(manyElement.size() > 1);
     }
 
     @Test
-     void allowDuplicates() {
+    public void allowDuplicates() {
         manyElement.add("sasha");
         assertEquals(3, manyElement.size());
     }
 
     @Test
-     void remove() {
+    public void remove() {
         assertTrue(oneElement.remove("sophia"));
         assertEquals(0, oneElement.size());
         assertTrue(manyElement.remove("josh"));
@@ -57,7 +57,7 @@ import static org.junit.jupiter.api.Assertions.fail;
     }
 
     @Test
-     void removeCollapsesList() {
+    public void removeCollapsesList() {
         manyElement.add("tracy");
         assertEquals(3, manyElement.size());
         manyElement.remove("sasha");
@@ -66,13 +66,13 @@ import static org.junit.jupiter.api.Assertions.fail;
     }
 
     @Test
-     void addAll() {
+    public void addAll() {
         oneElement.addAll(manyElement);
         assertEquals(3, oneElement.size());
     }
 
     @Test
-     void addAllWithSet() {
+    public void addAllWithSet() {
         Set smallSet = new Set();
         smallSet.add("Dave");
         oneElement.addAll(smallSet);
@@ -80,12 +80,12 @@ import static org.junit.jupiter.api.Assertions.fail;
     }
 
     @Test
-     void getWhenIndexOutOfBounds() {
-        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> empty.get(12));
+    public void getWhenIndexOutOfBounds() {
+        Exception exception = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> empty.get(12));
     }
 
     @Test
-     void expandability() {
+    public void expandability() {
         List expandableList = new List();
         assertEquals(10, expandableList.capacity());
         for (int i = 0; i < 11; i++)
@@ -95,13 +95,13 @@ import static org.junit.jupiter.api.Assertions.fail;
     }
 
     @Test
-     void override() {
+    public void override() {
         oneElement.set(0, "mary");
         assertEquals("mary", oneElement.get(0));
     }
 
     @Test
-     void overrideWhenOutOfBounds() {
+    public void overrideWhenOutOfBounds() {
         try {
             oneElement.set(8, "mary");
             fail("should have thrown ArrayIndexOutOfBoundsException");
@@ -111,28 +111,28 @@ import static org.junit.jupiter.api.Assertions.fail;
     }
 
     @Test
-     void readOnlyOnAdd() {
+    public void readOnlyOnAdd() {
         oneElement.setReadOnly(true);
         oneElement.add("eva");
         assertEquals(1, oneElement.size());
     }
 
     @Test
-     void readOnlyOnSet() {
+    public void readOnlyOnSet() {
         oneElement.setReadOnly(true);
         oneElement.set(0, "eva");
         assertEquals("sophia", oneElement.get(0));
     }
 
     @Test
-     void readOnlyOnRemove() {
+    public void readOnlyOnRemove() {
         oneElement.setReadOnly(true);
         oneElement.remove("sophia");
         assertEquals(1, oneElement.size());
     }
 
     @Test
-     void readOnlyOnAddAll() {
+    public void readOnlyOnAddAll() {
         oneElement.setReadOnly(true);
         oneElement.addAll(manyElement);
         assertEquals(1, oneElement.size());

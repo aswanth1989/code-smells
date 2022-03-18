@@ -104,16 +104,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     }
 
     @Test
-     void expandability() {
-        Map expandableMap = new Map();
-        assertEquals(10, expandableMap.capacity());
-        for (int i = 0; i < 11; i++)
-            expandableMap.add(i, "" + i);
-        assertEquals(11, expandableMap.size());
-        assertEquals(20, expandableMap.capacity());
-    }
-
-    @Test
      void readOnlyOnAdd() {
         oneElement.setReadOnly(true);
         oneElement.add("WI", "Wisconsin");
